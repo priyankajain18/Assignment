@@ -2,11 +2,12 @@ import os, sys
 
 
 def solve_jumble_word(jumble_word):
+
     result = {}
 
-    lower_jumble_word = jumble_word.lower()
+    lower_jumble_word = jumble_word.strip().lower()
 
-    # Sort jumble_word to check if sorted_jumble_word exists as a key in jumble_dict
+    # Sort lower_jumble_word to check if sorted_jumble_word exists as a key in jumble_dict
     sorted_jumble_word = ''.join(sorted(lower_jumble_word))
 
     try:
@@ -19,27 +20,29 @@ def solve_jumble_word(jumble_word):
                 # Remove whitespace characters and then convert it to lowercase
                 word = line.strip().lower()
 
-                # Sort j_word to make it as a key in jumble_dict
-                sorted_word = ''.join(sorted(word))
+                # Check if length of word is equal to length of sorted_jumble_word
+                if len(word) == len(sorted_jumble_word):
+                    # Sort word to make it as a key in jumble_dict
+                    sorted_word = ''.join(sorted(word))
 
-                # Make sorted_j_word as a key in jumble_dict with empty list as a value
-                # If it already exists then append its value with j_word
-                jumble_dict.setdefault(sorted_word, []).append(word)
-
+                    if sorted_word.startswith(sorted_jumble_word[0]) and sorted_word.endswith(sorted_jumble_word[-1]):
+                        # Make sorted_word as a key in jumble_dict with empty list as a value
+                        # If it already exists then append its value with word
+                        jumble_dict.setdefault(sorted_word, []).append(word)
             f.close()
             break
 
         # Check if sorted_jumble_word exists as a key in jumble_dict
         if sorted_jumble_word in jumble_dict:
-            for word in jumble_dict[sorted_jumble_word]:
-                result.setdefault("words", []).append(word)
+            result["words"] = jumble_dict[sorted_jumble_word]
         else:
-            result.setdefault("message", "Sorry! No word is present for %s" % jumble_word)
+            result["message"] = "Sorry! No word is present for %s" % jumble_word
 
     except IOError:
-        result.setdefault("message", "Oops! File doesn't exist.")
+        result["message"] = "Oops! File doesn't exist."
 
     return result
+
 
 if __name__ == '__main__':
 
