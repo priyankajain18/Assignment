@@ -1,6 +1,7 @@
 from random import randint
 
 
+# Companies
 company1 = 'IDFC'
 company2 = 'CEAT'
 company3 = 'GAIL'

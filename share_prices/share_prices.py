@@ -7,6 +7,8 @@ def highest_share_price(f_path):
 
     try:
         f = open(f_path, 'r')
+
+        # Convert csv file content in dictionary format
         file_reader_object = csv.DictReader(f)
 
         for dict_object in file_reader_object:
@@ -27,7 +29,10 @@ def highest_share_price(f_path):
                             # MphasiS
                             # BankBazaar
 
+                # Check if key is neither 'Year'nor 'Month'
                 if key not in ('Year', 'Month'):
+
+                    # If key is not present in result dictionary then add it with empty dictionary as value
                     if key not in result:
                         result[key] = {}
                         #print result # {'Wipro': {}, 'IndiGo': {}, 'BankBazaar': {}, 'MphasiS': {}, 'IDFC': {}, 'GAIL': {}, 'Infosys': {}, 'CEAT': {}, 'Snapdeal': {}, 'Flipkart': {}}

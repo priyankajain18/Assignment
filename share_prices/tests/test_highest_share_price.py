@@ -11,9 +11,15 @@ class TestHighestSharePrice(unittest.TestCase):
         self.response = highest_share_price(self.f_path)
 
     def test_highest_share_price_response_length(self):
+        """
+        Check if length of response is equal to 10
+        """
         self.assertEqual(len(self.response), 10)
 
     def test_highest_share_price_data(self):
+        """
+        Check if the dictionary returned in response is equal to the expected dictionary
+        """
         self.assertDictEqual(self.response['Wipro'], {'Price': '998', 'Month': 'November', 'Year': '2011'})
         self.assertDictEqual(self.response['IndiGo'], {'Price': '966', 'Month': 'December', 'Year': '2012'})
         self.assertDictEqual(self.response['BankBazaar'], {'Price': '990', 'Month': 'October', 'Year': '2012'})
